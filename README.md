@@ -9,6 +9,9 @@ detectar riesgo relativo, generar alertas y visualizar resultados.
 ---
 ## DESPLIEGUE🐐
 - https://agrodatalab.onrender.com
+
+## Vídeo
+- https://drive.google.com/file/d/13PI22OgN7jOym64HN09CXSGBE3IGZ90q/view?usp=sharing
 ## Integrantes
 
 - **Diegos** — análisis, modelo, aplicación Django, despliegue y documentación.
