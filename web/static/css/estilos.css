@@ -1,0 +1,17 @@
+/* Estilos propios de AgroDataLab Web. Bootstrap se carga por CDN; aquí
+   ajustamos detalles de marca y mejoras de legibilidad. */
+
+body { background-color: #fafaf7; }
+
+.navbar-brand { letter-spacing: 0.5px; }
+
+.card { border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+table th { font-size: 0.9rem; }
+table td { font-size: 0.92rem; }
+
+blockquote { color: #354f3a; }
+
+img.border { background: white; }
+
+footer { font-size: 0.85rem; }

@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — AgroDataLab{% endblock %}
+{% block contenido %}
+<h1 class="h3 mb-3">Dashboard EnviroPro</h1>
+
+<div class="row g-3">
+    <div class="col-md-3">
+        <div class="card text-bg-success"><div class="card-body">
+            <div class="small">Total de registros</div>
+            <div class="h3 mb-0">{{ kpis.total_registros|default:0 }}</div>
+        </div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card"><div class="card-body">
+            <div class="small text-muted">Humedad media global</div>
+            <div class="h3 mb-0">{{ kpis.humedad_media_global|default:"–"|floatformat:1 }}%</div>
+        </div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card"><div class="card-body">
+            <div class="small text-muted">Temperatura media</div>
+            <div class="h3 mb-0">{{ kpis.temp_media_global|default:"–"|floatformat:1 }}°C</div>
+        </div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card"><div class="card-body">
+            <div class="small text-muted">Batería media</div>
+            <div class="h3 mb-0">{{ kpis.bateria_media_v|default:"–"|floatformat:2 }} V</div>
+        </div></div>
+    </div>
+</div>
+
+<div class="row g-3 mt-1">
+    <div class="col-md-3">
+        <div class="card"><div class="card-body">
+            <div class="small text-muted">Panel solar medio</div>
+            <div class="h4 mb-0">{{ kpis.panel_solar_media_v|default:"–"|floatformat:2 }} V</div>
+        </div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-warning"><div class="card-body">
+            <div class="small">Alertas de sequedad</div>
+            <div class="h4 mb-0">{{ kpis.n_alertas_sequedad|default:0 }}</div>
+        </div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-danger"><div class="card-body">
+            <div class="small">Alertas energéticas</div>
+            <div class="h4 mb-0">{{ kpis.n_alertas_energeticas|default:0 }}</div>
+        </div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card"><div class="card-body">
+            <div class="small text-muted">Alertas temp. incoherente</div>
+            <div class="h4 mb-0">{{ kpis.n_alertas_temp_incoherente|default:0 }}</div>
+        </div></div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <h4>Gráficas del análisis</h4>
+        <div class="row g-3">
+        {% for g in graficas %}
+            <div class="col-md-6">
+                <img src="/graficas/{{ g }}" class="img-fluid border rounded" alt="{{ g }}">
+                <p class="small text-muted mt-1">{{ g }}</p>
+            </div>
+        {% empty %}
+            <p class="text-muted">No hay gráficas todavía. Ejecuta <code>python analisis/main.py</code>.</p>
+        {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h4>Alertas recientes</h4>
+        <ul class="list-group">
+        {% for a in alertas_recientes %}
+            <li class="list-group-item">
+                <small class="text-muted">{{ a.fecha_hora|date:"d/m/Y H:i" }}</small><br>
+                <strong>[{{ a.get_nivel_display }}]</strong>
+                <a href="{% url 'alerta_detalle' a.pk %}">{{ a.tipo }}</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item text-muted">Sin alertas registradas.</li>
+        {% endfor %}
+        </ul>
+
+        {% if ultima_recomendacion %}
+        <h4 class="mt-3">Última recomendación</h4>
+        <div class="card"><div class="card-body">
+            <h6>{{ ultima_recomendacion.titulo }}</h6>
+            <p class="small mb-1">{{ ultima_recomendacion.descripcion|truncatewords:25 }}</p>
+            <span class="badge bg-secondary">{{ ultima_recomendacion.get_prioridad_display }}</span>
+        </div></div>
+        {% endif %}
+
+        <p class="mt-3">
+            <strong>Primera lectura:</strong> {{ kpis.fecha_primera_lectura|default:"–" }}<br>
+            <strong>Última lectura:</strong> {{ kpis.fecha_ultima_lectura|default:"–" }}
+        </p>
+    </div>
+</div>
+{% endblock %}

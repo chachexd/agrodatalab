@@ -1,0 +1,31 @@
+{
+  "estado": "entrenado",
+  "tipo": "clasificacion_logistic_regression",
+  "features": [
+    "humedad_media_global",
+    "temp_media_global",
+    "bateria_mv",
+    "panel_solar_mv",
+    "humedad_rango",
+    "temp_rango",
+    "humedad_media_6h",
+    "humedad_delta"
+  ],
+  "n_train": 16223,
+  "n_test": 4056,
+  "accuracy": 0.11094674556213018,
+  "precision": 0.1083086053412463,
+  "recall": 1.0,
+  "f1": 0.19544846050870146,
+  "matriz_confusion": [
+    [
+      12,
+      3606
+    ],
+    [
+      0,
+      438
+    ]
+  ],
+  "reporte_texto": "              precision    recall  f1-score   support\n\n           0       1.00      0.00      0.01      3618\n           1       0.11      1.00      0.20       438\n\n    accuracy                           0.11      4056\n   macro avg       0.55      0.50      0.10      4056\nweighted avg       0.90      0.11      0.03      4056\n"
+}

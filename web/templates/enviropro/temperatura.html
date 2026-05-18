@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Temperatura — AgroDataLab{% endblock %}
+{% block contenido %}
+<h1 class="h3 mb-3">Temperatura del suelo</h1>
+
+<div class="row g-3 mb-3">
+    {% for g in graficas %}
+    <div class="col-md-4">
+        <img src="/graficas/{{ g }}" class="img-fluid border rounded" alt="{{ g }}">
+    </div>
+    {% endfor %}
+</div>
+
+<h4>Últimas 200 lecturas</h4>
+<div class="table-responsive">
+<table class="table table-sm table-striped align-middle">
+    <thead><tr>
+        <th>Fecha y hora</th>
+        <th>T media (°C)</th>
+        <th>T max (°C)</th>
+        <th>T min (°C)</th>
+        <th>Hum. media (%)</th>
+    </tr></thead>
+    <tbody>
+        {% for l in lecturas %}
+        <tr>
+            <td>{{ l.fecha_hora|date:"d/m/Y H:i" }}</td>
+            <td>{{ l.temp_suelo_media|floatformat:1 }}</td>
+            <td>{{ l.temp_suelo_max|floatformat:1 }}</td>
+            <td>{{ l.temp_suelo_min|floatformat:1 }}</td>
+            <td>{{ l.humedad_media|floatformat:1 }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="text-muted">Sin lecturas.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

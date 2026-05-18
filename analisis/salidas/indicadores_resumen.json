@@ -1,0 +1,18 @@
+{
+  "total_registros": 20284,
+  "fecha_primera_lectura": "2024-01-01T16:00:00",
+  "fecha_ultima_lectura": "2026-04-29T16:00:00",
+  "humedad_media_global": 17.558012504577853,
+  "humedad_min_global": 0.0,
+  "humedad_max_global": 99.24,
+  "temp_media_global": 18.338156367087358,
+  "temp_max_global": 57.24,
+  "temp_min_global": -5.06,
+  "bateria_media_v": 6.603573900611319,
+  "panel_solar_media_v": 4.036133159140209,
+  "n_alertas_total": 1824,
+  "n_alertas_sequedad": 65,
+  "n_alertas_energeticas": 100,
+  "n_alertas_temp_incoherente": 0,
+  "ultima_recomendacion": "Revisar conectividad, energía o sistema de registro."
+}

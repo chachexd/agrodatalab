@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Alertas — AgroDataLab{% endblock %}
+{% block contenido %}
+<h1 class="h3 mb-3">Alertas generadas</h1>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-3">
+        <select name="tipo" class="form-select">
+            <option value="">— Todos los tipos —</option>
+            {% for t in tipos %}
+                <option value="{{ t }}" {% if t == filtro_tipo %}selected{% endif %}>{{ t }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select name="nivel" class="form-select">
+            <option value="">— Todos los niveles —</option>
+            <option value="info" {% if filtro_nivel == "info" %}selected{% endif %}>Informativa</option>
+            <option value="aviso" {% if filtro_nivel == "aviso" %}selected{% endif %}>Aviso</option>
+            <option value="critico" {% if filtro_nivel == "critico" %}selected{% endif %}>Crítica</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select name="revisada" class="form-select">
+            <option value="">— Todas —</option>
+            <option value="0" {% if filtro_revisada == "0" %}selected{% endif %}>Pendientes</option>
+            <option value="1" {% if filtro_revisada == "1" %}selected{% endif %}>Revisadas</option>
+        </select>
+    </div>
+    <div class="col-md-3"><button class="btn btn-success w-100">Filtrar</button></div>
+</form>
+
+<div class="table-responsive">
+<table class="table table-striped align-middle">
+    <thead><tr>
+        <th>Fecha</th><th>Tipo</th><th>Nivel</th><th>Variable</th><th>Descripción</th><th>Estado</th>
+    </tr></thead>
+    <tbody>
+        {% for a in alertas %}
+        <tr>
+            <td>{{ a.fecha_hora|date:"d/m/Y H:i" }}</td>
+            <td><a href="{% url 'alerta_detalle' a.pk %}">{{ a.tipo }}</a></td>
+            <td>
+              {% if a.nivel == "critico" %}<span class="badge bg-danger">{{ a.get_nivel_display }}</span>
+              {% elif a.nivel == "aviso" %}<span class="badge bg-warning text-dark">{{ a.get_nivel_display }}</span>
+              {% else %}<span class="badge bg-info text-dark">{{ a.get_nivel_display }}</span>{% endif %}
+            </td>
+            <td><code>{{ a.variable }}</code></td>
+            <td class="small">{{ a.descripcion|truncatewords:18 }}</td>
+            <td>{% if a.revisada %}✅{% else %}🕓{% endif %}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="text-muted">No hay alertas con esos filtros.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

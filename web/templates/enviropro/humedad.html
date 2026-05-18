@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Humedad — AgroDataLab{% endblock %}
+{% block contenido %}
+<h1 class="h3 mb-3">Humedad del suelo</h1>
+
+<div class="row g-3 mb-3">
+    {% for g in graficas %}
+    <div class="col-md-4">
+        <img src="/graficas/{{ g }}" class="img-fluid border rounded" alt="{{ g }}">
+    </div>
+    {% endfor %}
+</div>
+
+<h4>Últimas 200 lecturas</h4>
+<div class="table-responsive">
+<table class="table table-sm table-striped align-middle">
+    <thead><tr>
+        <th>Fecha y hora</th>
+        <th>Media (%)</th>
+        <th>Min (%)</th>
+        <th>Max (%)</th>
+        <th>Temp. media (°C)</th>
+        <th>Observaciones</th>
+        {% if user.is_authenticated %}<th>Acción</th>{% endif %}
+    </tr></thead>
+    <tbody>
+        {% for l in lecturas %}
+        <tr>
+            <td>{{ l.fecha_hora|date:"d/m/Y H:i" }}</td>
+            <td>{{ l.humedad_media|floatformat:1 }}</td>
+            <td>{{ l.humedad_min|floatformat:1 }}</td>
+            <td>{{ l.humedad_max|floatformat:1 }}</td>
+            <td>{{ l.temp_suelo_media|floatformat:1 }}</td>
+            <td class="small">{{ l.observaciones|truncatewords:8 }}</td>
+            {% if user.is_authenticated %}
+            <td><a class="btn btn-outline-secondary btn-sm" href="{% url 'lectura_observacion' l.pk %}">Anotar</a></td>
+            {% endif %}
+        </tr>
+        {% empty %}
+        <tr><td colspan="7" class="text-muted">Sin lecturas. Ejecuta <code>python manage.py poblar_bbdd</code>.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

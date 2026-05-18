@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Registro — AgroDataLab{% endblock %}
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h1 class="h3 mb-3">Crear una cuenta</h1>
+        <form method="post">{% csrf_token %}
+            {% for campo in form %}
+            <div class="mb-3">
+                <label class="form-label">{{ campo.label }}</label>
+                {{ campo }}
+                {% if campo.help_text %}<small class="form-text text-muted">{{ campo.help_text|safe }}</small>{% endif %}
+                {% if campo.errors %}<div class="text-danger small">{{ campo.errors|striptags }}</div>{% endif %}
+            </div>
+            {% endfor %}
+            <button class="btn btn-success">Registrarme</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Observación — lectura {{ lectura.fecha_hora|date:"d/m/Y H:i" }}{% endblock %}
+{% block contenido %}
+<h1 class="h3 mb-3">Anotar lectura del {{ lectura.fecha_hora|date:"d/m/Y H:i" }}</h1>
+<p>
+    <strong>Humedad media:</strong> {{ lectura.humedad_media|floatformat:1 }} %
+    | <strong>Temperatura:</strong> {{ lectura.temp_suelo_media|floatformat:1 }} °C
+    | <strong>Batería:</strong> {{ lectura.bateria_v|floatformat:2 }} V
+</p>
+<form method="post">{% csrf_token %}
+    <label class="form-label">Observaciones</label>
+    {{ form.observaciones }}
+    <button class="btn btn-success mt-2">Guardar</button>
+    <a class="btn btn-link" href="{% url 'humedad' %}">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Inicio — AgroDataLab EnviroPro{% endblock %}
+{% block contenido %}
+<section class="text-center py-5">
+    <h1 class="display-5 fw-bold text-success">AgroDataLab EnviroPro</h1>
+    <p class="lead">
+        Analítica de datos y aplicación web para el proyecto educativo
+        <em>Horizonte Verde Digital</em>.
+    </p>
+    <p>
+        Transformamos datos reales de sensores agrícolas EnviroPro en información útil
+        para analizar el estado del suelo, detectar situaciones de riesgo relativo,
+        generar alertas y visualizar resultados.
+    </p>
+    <a class="btn btn-success btn-lg me-2" href="{% url 'dashboard' %}">Ver dashboard</a>
+    <a class="btn btn-outline-success btn-lg" href="{% url 'acerca' %}">Acerca del proyecto</a>
+</section>
+
+<section class="row mt-4 g-3">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">📊 Análisis de datos</h5>
+                <p>Limpieza, EDA y modelo predictivo en Python (Pandas + Scikit-learn).</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">🚨 Alertas inteligentes</h5>
+                <p>Nueve tipos de alertas con recomendaciones prudentes asociadas.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">🌍 Aplicación web</h5>
+                <p>Django + Bootstrap. Dashboard, CRUD de recomendaciones y gestión de usuarios.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

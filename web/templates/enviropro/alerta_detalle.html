@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Alerta #{{ alerta.pk }} — AgroDataLab{% endblock %}
+{% block contenido %}
+<a href="{% url 'alertas_listado' %}" class="btn btn-sm btn-link">← Volver al listado</a>
+
+<h1 class="h3 mt-2">Alerta #{{ alerta.pk }}: {{ alerta.tipo }}</h1>
+
+<div class="card my-3">
+    <div class="card-body">
+        <p><strong>Fecha y hora:</strong> {{ alerta.fecha_hora|date:"d/m/Y H:i" }}</p>
+        <p><strong>Nivel:</strong>
+          {% if alerta.nivel == "critico" %}<span class="badge bg-danger">{{ alerta.get_nivel_display }}</span>
+          {% elif alerta.nivel == "aviso" %}<span class="badge bg-warning text-dark">{{ alerta.get_nivel_display }}</span>
+          {% else %}<span class="badge bg-info text-dark">{{ alerta.get_nivel_display }}</span>{% endif %}
+        </p>
+        <p><strong>Variable afectada:</strong> <code>{{ alerta.variable }}</code></p>
+        <p><strong>Descripción:</strong></p>
+        <blockquote class="border-start ps-2">{{ alerta.descripcion }}</blockquote>
+        {% if alerta.recomendacion %}
+        <p><strong>Recomendación asociada:</strong></p>
+        <blockquote class="border-start ps-2 text-success">{{ alerta.recomendacion }}</blockquote>
+        {% endif %}
+        <p><strong>Estado:</strong>
+            {% if alerta.revisada %}<span class="badge bg-success">Revisada</span>
+            {% else %}<span class="badge bg-secondary">Pendiente</span>{% endif %}
+        </p>
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'alerta_revisar' alerta.pk %}">{% csrf_token %}
+            <button class="btn btn-sm btn-outline-success">
+                {% if alerta.revisada %}Marcar como pendiente{% else %}Marcar como revisada{% endif %}
+            </button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% if alerta.recomendaciones.all %}
+<h4>Recomendaciones manuales vinculadas</h4>
+<ul>
+    {% for r in alerta.recomendaciones.all %}
+    <li><a href="{% url 'recomendacion_detalle' r.pk %}">{{ r.titulo }}</a> — {{ r.get_estado_display }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

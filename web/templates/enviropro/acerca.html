@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Acerca del proyecto — AgroDataLab{% endblock %}
+{% block contenido %}
+<h1 class="h3 mb-3">Acerca del proyecto AgroDataLab EnviroPro</h1>
+
+<p><strong>AgroDataLab EnviroPro</strong> es la práctica intermodular del programa
+educativo <em>Horizonte Verde Digital</em>, que conecta el sector agrario con la
+familia profesional de Informática y Comunicaciones.</p>
+
+<h4 class="mt-4">Objetivos</h4>
+<ul>
+    <li>Transformar datos reales de sensores agrícolas en información útil.</li>
+    <li>Analizar humedad, temperatura, batería y panel solar del nodo EnviroPro.</li>
+    <li>Detectar situaciones de riesgo relativo y generar alertas con recomendaciones prudentes.</li>
+    <li>Entrenar un modelo predictivo sencillo que anticipe periodos de sequedad.</li>
+    <li>Visualizar los resultados mediante una aplicación web Django desplegada en hosting.</li>
+</ul>
+
+<h4 class="mt-4">Alcance</h4>
+<p>El sistema <strong>no</strong> emite órdenes agronómicas absolutas. No conoce el
+tipo de cultivo, el riego aplicado, la profundidad exacta de cada sensor ni la
+lluvia local. Las recomendaciones se formulan en términos de <em>riesgo
+relativo</em> y deben ser contrastadas con el equipo agrario.</p>
+
+<h4 class="mt-4">Stack técnico</h4>
+<ul>
+    <li>Análisis: <strong>Python 3.10</strong>, Pandas, NumPy, Matplotlib, Scikit-learn.</li>
+    <li>Web: <strong>Django 5</strong> con Bootstrap 5 y WhiteNoise para estáticos.</li>
+    <li>Base de datos: SQLite (desarrollo), PostgreSQL (producción opcional).</li>
+    <li>Despliegue: Render / PythonAnywhere / Railway (cualquier hosting Django).</li>
+</ul>
+
+<h4 class="mt-4">Equipo</h4>
+<p>Proyecto realizado por <strong>Diego</strong> dentro del programa educativo
+Horizonte Verde Digital.</p>
+
+<h4 class="mt-4">Limitaciones y mejoras futuras</h4>
+<ul>
+    <li>Integración con la API REST de IFAPA-RIA (ampliación opcional documentada en el notebook).</li>
+    <li>Mejora del modelo predictivo con técnicas no lineales.</li>
+    <li>Notificación push de alertas críticas (Telegram, email).</li>
+</ul>
+{% endblock %}

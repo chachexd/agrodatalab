@@ -1,0 +1,9 @@
+{
+  "registros_iniciales": 20284,
+  "registros_finales": 20284,
+  "duplicados_eliminados": 0,
+  "fechas_invalidas_eliminadas": 0,
+  "valores_fuera_de_rango_anulados": 63,
+  "incoherencias_temperatura": 0,
+  "huecos_temporales": 5
+}

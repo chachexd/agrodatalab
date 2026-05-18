@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Sesión cerrada — AgroDataLab{% endblock %}
+{% block contenido %}
+<h1 class="h3">Has cerrado sesión correctamente.</h1>
+<p><a class="btn btn-success" href="{% url 'login' %}">Volver a entrar</a></p>
+{% endblock %}
