@@ -7,10 +7,11 @@ Proyecto intermodular que transforma datos reales de sensores agrícolas
 detectar riesgo relativo, generar alertas y visualizar resultados.
 
 ---
-
+## DESPLIEGUE🐐
+- https://agrodatalab.onrender.com
 ## Integrantes
 
-- **Diego** — análisis, modelo, aplicación Django, despliegue y documentación.
+- **Diegos** — análisis, modelo, aplicación Django, despliegue y documentación.
 
 ## Descripción del problema
 
